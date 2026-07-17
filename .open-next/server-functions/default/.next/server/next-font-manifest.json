@@ -1,0 +1,58 @@
+{
+  "app": {
+    "[project]/app/_not-found/page": [
+      "static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2"
+    ],
+    "[project]/app/about/page": [
+      "static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2"
+    ],
+    "[project]/app/advertise/page": [
+      "static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2"
+    ],
+    "[project]/app/affiliate-disclosure/page": [
+      "static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2"
+    ],
+    "[project]/app/article/[slug]/page": [
+      "static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2"
+    ],
+    "[project]/app/author/[slug]/page": [
+      "static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2"
+    ],
+    "[project]/app/authors/page": [
+      "static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2"
+    ],
+    "[project]/app/category/[slug]/page": [
+      "static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2"
+    ],
+    "[project]/app/contact/page": [
+      "static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2"
+    ],
+    "[project]/app/cookie-policy/page": [
+      "static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2"
+    ],
+    "[project]/app/disclaimer/page": [
+      "static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2"
+    ],
+    "[project]/app/editorial-policy/page": [
+      "static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2"
+    ],
+    "[project]/app/page": [
+      "static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2"
+    ],
+    "[project]/app/privacy-policy/page": [
+      "static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2"
+    ],
+    "[project]/app/search/page": [
+      "static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2"
+    ],
+    "[project]/app/terms/page": [
+      "static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2"
+    ],
+    "[project]/app/write-for-us/page": [
+      "static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pages": {},
+  "pagesUsingSizeAdjust": false
+}

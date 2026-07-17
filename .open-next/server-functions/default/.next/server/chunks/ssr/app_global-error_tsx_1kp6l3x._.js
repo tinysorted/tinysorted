@@ -1,0 +1,3 @@
+module.exports=[3171,a=>{"use strict";var b=a.i(87924);a.s(["default",0,function({error:a,reset:c}){return(0,b.jsx)("html",{children:(0,b.jsx)("body",{style:{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",padding:"24px",textAlign:"center"},children:(0,b.jsxs)("div",{children:[(0,b.jsx)("h1",{children:"Something went wrong."}),(0,b.jsx)("p",{children:"Please try again."}),(0,b.jsx)("button",{onClick:()=>c(),style:{marginTop:"16px",padding:"12px 20px",cursor:"pointer"},children:"Reload Page"})]})})})}])}];
+
+//# sourceMappingURL=app_global-error_tsx_1kp6l3x._.js.map
