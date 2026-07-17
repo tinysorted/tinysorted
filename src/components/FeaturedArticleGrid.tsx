@@ -14,16 +14,40 @@ export default function FeaturedArticleGrid({
   const sidebar = articles.slice(1, 4);
 
   return (
-    <section className="max-w-[1280px] mx-auto px-6 py-24">
+    <section
+      className="
+        mx-auto
+        max-w-[1280px]
 
-      <div className="mb-14">
+        px-5
+        py-14
+
+        md:px-6
+        md:py-20
+
+        lg:py-24
+      "
+    >
+      {/* Heading */}
+
+      <div
+        className="
+          mb-8
+
+          md:mb-14
+        "
+      >
         <p
           className="
+            mb-3
+
+            text-[11px]
             uppercase
             tracking-[0.2em]
-            text-xs
+
             text-neutral-500
-            mb-3
+
+            md:text-xs
           "
         >
           Curated Stories
@@ -31,18 +55,32 @@ export default function FeaturedArticleGrid({
 
         <h2
           className="
-            text-4xl
-            md:text-5xl
+            text-3xl
             font-light
+            leading-tight
+            tracking-[-0.03em]
+
             text-neutral-900
+
+            sm:text-4xl
+            md:text-5xl
           "
         >
           Thoughtful ideas for calmer living.
         </h2>
       </div>
 
-      <div className="grid lg:grid-cols-12 gap-8">
+      {/* Content */}
 
+      <div
+        className="
+          grid
+
+          gap-8
+
+          lg:grid-cols-12
+        "
+      >
         {/* Featured */}
 
         <Link
@@ -53,7 +91,9 @@ export default function FeaturedArticleGrid({
             <div
               className="
                 overflow-hidden
-                rounded-[32px]
+                rounded-[28px]
+
+                md:rounded-[32px]
               "
             >
               <img
@@ -63,22 +103,36 @@ export default function FeaturedArticleGrid({
                 alt={featured.title}
                 className="
                   w-full
-                  h-[640px]
+
+                  h-[260px]
+
                   object-cover
+
                   transition
                   duration-500
+
                   hover:scale-[1.02]
+
+                  sm:h-[340px]
+                  md:h-[420px]
+                  lg:h-[640px]
                 "
               />
             </div>
 
             <h3
               className="
-                mt-8
-                text-3xl
-                md:text-4xl
+                mt-5
+
+                text-2xl
                 font-light
                 leading-tight
+
+                text-neutral-900
+
+                sm:text-3xl
+                md:mt-8
+                md:text-4xl
               "
             >
               {featured.title}
@@ -86,9 +140,15 @@ export default function FeaturedArticleGrid({
 
             <p
               className="
-                mt-4
+                mt-3
+
+                text-base
+                leading-7
+
                 text-neutral-600
-                leading-8
+
+                md:mt-4
+                md:leading-8
               "
             >
               {featured.excerpt}
@@ -98,7 +158,17 @@ export default function FeaturedArticleGrid({
 
         {/* Sidebar */}
 
-        <div className="lg:col-span-5 flex flex-col gap-8">
+        <div
+          className="
+            flex
+            flex-col
+
+            gap-6
+
+            lg:col-span-5
+            md:gap-8
+          "
+        >
           {sidebar.map((article) => (
             <Link
               key={article._id}
@@ -107,8 +177,11 @@ export default function FeaturedArticleGrid({
               <article
                 className="
                   flex
-                  gap-5
                   items-center
+
+                  gap-4
+
+                  md:gap-5
                 "
               >
                 <img
@@ -117,20 +190,34 @@ export default function FeaturedArticleGrid({
                     .url()}
                   alt={article.title}
                   className="
-                    w-[140px]
-                    h-[140px]
-                    rounded-[24px]
-                    object-cover
+                    h-[110px]
+                    w-[110px]
+
                     flex-shrink-0
+
+                    rounded-[20px]
+
+                    object-cover
+
+                    sm:h-[120px]
+                    sm:w-[120px]
+
+                    md:h-[140px]
+                    md:w-[140px]
+                    md:rounded-[24px]
                   "
                 />
 
-                <div>
+                <div className="min-w-0 flex-1">
                   <h3
                     className="
-                      text-xl
-                      leading-snug
+                      text-lg
                       font-medium
+                      leading-snug
+
+                      text-neutral-900
+
+                      md:text-xl
                     "
                   >
                     {article.title}
@@ -139,8 +226,12 @@ export default function FeaturedArticleGrid({
                   <p
                     className="
                       mt-2
+
                       text-sm
+                      leading-6
+
                       text-neutral-600
+
                       line-clamp-2
                     "
                   >
@@ -151,9 +242,7 @@ export default function FeaturedArticleGrid({
             </Link>
           ))}
         </div>
-
       </div>
-
     </section>
   );
 }
