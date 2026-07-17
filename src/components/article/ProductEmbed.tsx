@@ -27,17 +27,15 @@ interface Props {
   product: Product;
 }
 
-export default function ProductEmbed({
-  product,
-}: Props) {
+export default function ProductEmbed({ product }: Props) {
   if (!product) return null;
 
   return (
     <aside
       className="
-        my-14
+        my-12
         overflow-hidden
-        rounded-[32px]
+        rounded-[28px]
         border
         border-neutral-200
         bg-white
@@ -47,7 +45,6 @@ export default function ProductEmbed({
       <div
         className="
           grid
-          gap-8
 
           md:grid-cols-[260px_1fr]
         "
@@ -65,14 +62,25 @@ export default function ProductEmbed({
               width={700}
               height={700}
               className="
-                h-full
-                min-h-[250px]
+                h-[220px]
                 w-full
                 object-cover
+
+                md:h-full
+                md:min-h-[320px]
               "
             />
           ) : (
-            <div className="h-full min-h-[250px] bg-neutral-100" />
+            <div
+              className="
+                h-[220px]
+                w-full
+                bg-neutral-100
+
+                md:h-full
+                md:min-h-[320px]
+              "
+            />
           )}
         </div>
 
@@ -84,29 +92,32 @@ export default function ProductEmbed({
             flex-col
             justify-center
 
-            p-10
+            p-6
+
+            md:p-10
           "
         >
-          <span
+          <p
             className="
-              mb-4
-
-              text-xs
+              text-[11px]
               uppercase
               tracking-[0.25em]
-
-              text-white
+              text-neutral-500
             "
           >
             Recommended Product
-          </span>
+          </p>
 
           <h3
             className="
-              text-4xl
+              mt-3
+
+              text-2xl
               font-light
               leading-tight
               text-neutral-900
+
+              md:text-4xl
             "
           >
             {product.title}
@@ -116,10 +127,14 @@ export default function ProductEmbed({
             <p
               className="
                 mt-3
-                text-sm
+
+                text-xs
                 uppercase
-                tracking-widest
+                tracking-[0.18em]
+
                 text-neutral-500
+
+                md:text-sm
               "
             >
               {product.brand}
@@ -129,86 +144,99 @@ export default function ProductEmbed({
           {product.recommendation && (
             <p
               className="
-                mt-8
-                max-w-xl
-                text-lg
-                leading-8
+                mt-6
+
+                text-[15px]
+                leading-7
+
                 text-neutral-700
+
+                md:mt-8
+                md:text-lg
+                md:leading-8
               "
             >
               {product.recommendation}
             </p>
           )}
 
-          <div
-            className="
-              mt-8
-              flex
-              items-center
-              gap-5
-            "
-          >
-            {product.rating && (
-              <div
-                className="
-                  flex
-                  items-center
-                  gap-2
-                "
-              >
-                <Star
-                  size={18}
-                  className="fill-amber-400 text-amber-400"
-                />
+          {(product.rating || product.price) && (
+            <div
+              className="
+                mt-8
 
-                <span className="text-lg">
-                  {product.rating}
+                flex
+                flex-wrap
+                items-center
+                gap-5
+              "
+            >
+              {product.rating && (
+                <div
+                  className="
+                    flex
+                    items-center
+                    gap-2
+                  "
+                >
+                  <Star
+                    size={18}
+                    className="fill-amber-400 text-amber-400"
+                  />
+
+                  <span
+                    className="
+                      text-base
+
+                      md:text-lg
+                    "
+                  >
+                    {product.rating}
+                  </span>
+                </div>
+              )}
+
+              {product.price && (
+                <span
+                  className="
+                    text-xl
+                    font-semibold
+                    text-neutral-900
+
+                    md:text-2xl
+                  "
+                >
+                  {product.price}
                 </span>
-              </div>
-            )}
+              )}
+            </div>
+          )}
 
-            {product.price && (
-              <span
-                className="
-                  text-2xl
-                  font-semibold
-                "
-              >
-                {product.price}
-              </span>
-            )}
-          </div>
+          <div className="mt-8 md:mt-10">
+            <a
+              href={product.affiliateUrl}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="
+                inline-flex
+                items-center
+                gap-2
 
-          {/* BUTTON */}
+                text-sm
+                font-semibold
 
-          
-         <div className="mt-10">
-  <a
-    href={product.affiliateUrl}
-    target="_blank"
-    rel="noopener noreferrer sponsored"
-    className="
-      inline-flex
-      items-center
-      gap-2
+                text-neutral-900
 
-      text-base
-      font-semibold
+                transition-all
+                duration-300
 
-      text-neutral-900
+                hover:gap-3
+              "
+            >
+              View Product
 
-      transition-all
-      duration-300
-
-      hover:text-black
-      hover:gap-3
-    "
-  >
-    View Product
-
-    <ExternalLink size={18} />
-  </a>
-
+              <ExternalLink size={17} />
+            </a>
           </div>
         </div>
       </div>
