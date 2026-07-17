@@ -31,9 +31,7 @@ interface Props {
   author: Author;
 }
 
-export default function AuthorCard({
-  author,
-}: Props) {
+export default function AuthorCard({ author }: Props) {
   return (
     <section
       className="
@@ -41,11 +39,24 @@ export default function AuthorCard({
         border
         border-neutral-200
         bg-white
-        p-10
+        p-6
+        md:p-10
       "
     >
-      <div className="flex gap-8">
+      <div
+        className="
+          flex
+          flex-col
+          items-center
+          gap-6
+          text-center
 
+          md:flex-row
+          md:items-start
+          md:gap-8
+          md:text-left
+        "
+      >
         {/* Photo */}
 
         {author.image?.asset?.url && (
@@ -56,19 +67,21 @@ export default function AuthorCard({
             height={120}
             unoptimized
             className="
-              h-[120px]
-              w-[120px]
+              h-28
+              w-28
+              shrink-0
               rounded-full
               object-cover
-              shrink-0
+
+              md:h-[120px]
+              md:w-[120px]
             "
           />
         )}
 
         {/* Info */}
 
-        <div className="flex-1">
-
+        <div className="min-w-0 flex-1">
           <p
             className="
               uppercase
@@ -83,8 +96,11 @@ export default function AuthorCard({
           <h3
             className="
               mt-3
-              text-3xl
+              text-2xl
               font-light
+              leading-tight
+
+              md:text-3xl
             "
           >
             {author.name}
@@ -94,7 +110,10 @@ export default function AuthorCard({
             <p
               className="
                 mt-2
+                text-sm
                 text-neutral-500
+
+                md:text-base
               "
             >
               {author.role}
@@ -104,17 +123,29 @@ export default function AuthorCard({
           {author.bio && (
             <p
               className="
-                mt-6
-                leading-8
+                mt-5
+                text-[15px]
+                leading-7
                 text-neutral-700
+
+                md:mt-6
+                md:text-base
+                md:leading-8
               "
             >
               {author.bio}
             </p>
           )}
 
-          <div className="mt-8">
+          <div
+            className="
+              mt-8
+              flex
+              justify-center
 
+              md:justify-start
+            "
+          >
             <Link
               href={`/author/${author.slug.current}`}
               className="
@@ -123,16 +154,15 @@ export default function AuthorCard({
                 gap-2
                 text-sm
                 font-medium
+                transition-colors
+                hover:text-black
                 hover:underline
               "
             >
               View full profile →
             </Link>
-
           </div>
-
         </div>
-
       </div>
     </section>
   );
