@@ -1,14 +1,3 @@
-console.log(
-  "CF SANITY PROJECT:",
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
-);
-
-console.log(
-  "CF SANITY DATASET:",
-  process.env.NEXT_PUBLIC_SANITY_DATASET
-);
-
-
 import { createClient } from "next-sanity";
 
 export const client = createClient({
