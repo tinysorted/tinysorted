@@ -4,9 +4,12 @@ export default function Footer() {
   return (
     <footer
       className="
-        mt-40
+        mt-28
+        md:mt-40
+
         border-t
         border-neutral-200
+
         bg-[#F7F6F3]
       "
     >
@@ -14,8 +17,12 @@ export default function Footer() {
         className="
           mx-auto
           max-w-[1280px]
-          px-6
-          py-24
+
+          px-5
+          py-16
+
+          md:px-6
+          md:py-24
         "
       >
         {/* ========================= */}
@@ -25,15 +32,15 @@ export default function Footer() {
         <div
           className="
             grid
-            gap-16
+            gap-12
 
             md:grid-cols-2
             lg:grid-cols-[2fr_1fr_1fr_1fr]
+
+            lg:gap-16
           "
         >
-          {/* ================================= */}
           {/* BRAND */}
-          {/* ================================= */}
 
           <div>
             <Link href="/">
@@ -54,10 +61,11 @@ export default function Footer() {
 
             <p
               className="
-                mt-6
+                mt-5
                 max-w-xl
-                text-neutral-600
+
                 leading-8
+                text-neutral-600
               "
             >
               TinySorted helps people organize small spaces,
@@ -78,17 +86,17 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* ================================= */}
           {/* EXPLORE */}
-          {/* ================================= */}
 
           <div>
             <h3
               className="
                 mb-6
+
                 text-xs
                 uppercase
                 tracking-[0.24em]
+
                 text-neutral-500
               "
             >
@@ -98,52 +106,52 @@ export default function Footer() {
             <nav className="space-y-4">
               <Link
                 href="/"
-                className="block hover:text-black transition"
+                className="block transition hover:text-black"
               >
                 Home
               </Link>
 
               <Link
                 href="/category/decluttering"
-                className="block hover:text-black transition"
+                className="block transition hover:text-black"
               >
                 Decluttering
               </Link>
 
               <Link
                 href="/category/small-spaces"
-                className="block hover:text-black transition"
+                className="block transition hover:text-black"
               >
                 Small Spaces
               </Link>
 
               <Link
                 href="/category/storage-ideas"
-                className="block hover:text-black transition"
+                className="block transition hover:text-black"
               >
                 Storage Ideas
               </Link>
 
               <Link
                 href="/category/kitchen"
-                className="block hover:text-black transition"
+                className="block transition hover:text-black"
               >
                 Kitchen
               </Link>
             </nav>
           </div>
 
-          {/* ================================= */}
           {/* COMPANY */}
-          {/* ================================= */}
 
           <div>
             <h3
               className="
                 mb-6
+
                 text-xs
                 uppercase
                 tracking-[0.24em]
+
                 text-neutral-500
               "
             >
@@ -153,45 +161,45 @@ export default function Footer() {
             <nav className="space-y-4">
               <Link
                 href="/about"
-                className="block hover:text-black transition"
+                className="block transition hover:text-black"
               >
                 About Us
               </Link>
 
               <Link
                 href="/contact"
-                className="block hover:text-black transition"
+                className="block transition hover:text-black"
               >
                 Contact
               </Link>
 
               <Link
                 href="/write-for-us"
-                className="block hover:text-black transition"
+                className="block transition hover:text-black"
               >
                 Write For Us
               </Link>
 
               <Link
                 href="/advertise"
-                className="block hover:text-black transition"
+                className="block transition hover:text-black"
               >
                 Advertise
               </Link>
             </nav>
           </div>
 
-          {/* ================================= */}
           {/* LEGAL */}
-          {/* ================================= */}
 
           <div>
             <h3
               className="
                 mb-6
+
                 text-xs
                 uppercase
                 tracking-[0.24em]
+
                 text-neutral-500
               "
             >
@@ -201,28 +209,42 @@ export default function Footer() {
             <nav className="space-y-4">
               <Link
                 href="/privacy-policy"
-                className="block hover:text-black transition"
+                className="block transition hover:text-black"
               >
                 Privacy Policy
               </Link>
 
               <Link
                 href="/terms"
-                className="block hover:text-black transition"
+                className="block transition hover:text-black"
               >
                 Terms of Service
               </Link>
 
               <Link
+                href="/cookie-policy"
+                className="block transition hover:text-black"
+              >
+                Cookie Policy
+              </Link>
+
+              <Link
                 href="/affiliate-disclosure"
-                className="block hover:text-black transition"
+                className="block transition hover:text-black"
               >
                 Affiliate Disclosure
               </Link>
 
               <Link
+                href="/editorial-policy"
+                className="block transition hover:text-black"
+              >
+                Editorial Policy
+              </Link>
+
+              <Link
                 href="/disclaimer"
-                className="block hover:text-black transition"
+                className="block transition hover:text-black"
               >
                 Disclaimer
               </Link>
@@ -231,22 +253,29 @@ export default function Footer() {
         </div>
 
         {/* ========================= */}
-        {/* MIDDLE */}
+        {/* AFFILIATE NOTICE */}
         {/* ========================= */}
 
         <div
           className="
-            mt-20
+            mt-14
+
             border-t
             border-neutral-200
-            pt-10
+
+            pt-8
+
+            md:mt-20
+            md:pt-10
           "
         >
           <p
             className="
               max-w-4xl
+
               text-sm
               leading-7
+
               text-neutral-500
             "
           >
@@ -264,26 +293,28 @@ export default function Footer() {
 
         <div
           className="
-            mt-12
+            mt-10
+
             flex
             flex-col
+
             gap-4
 
             border-t
             border-neutral-200
+
             pt-8
 
+            text-sm
+            text-neutral-500
+
+            md:mt-12
             md:flex-row
             md:items-center
             md:justify-between
           "
         >
-          <p
-            className="
-              text-sm
-              text-neutral-500
-            "
-          >
+          <p>
             © {new Date().getFullYear()} TinySorted. All rights
             reserved.
           </p>
@@ -293,28 +324,11 @@ export default function Footer() {
               flex
               flex-wrap
               gap-6
-
-              text-sm
-              text-neutral-500
             "
           >
             <Link
-              href="/sitemap.xml"
-              className="hover:text-black transition"
-            >
-              Sitemap
-            </Link>
-
-            <Link
-              href="/rss.xml"
-              className="hover:text-black transition"
-            >
-              RSS
-            </Link>
-
-            <Link
               href="/contact"
-              className="hover:text-black transition"
+              className="transition hover:text-black"
             >
               Support
             </Link>
