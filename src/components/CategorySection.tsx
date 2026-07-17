@@ -21,31 +21,48 @@ export default function CategorySection({
   return (
     <section
       className="
-        max-w-[1280px]
         mx-auto
-        px-6
-        py-32
+        max-w-[1280px]
+
+        px-5
+        py-14
+
+        md:px-6
+        md:py-20
+
+        lg:py-28
       "
     >
+      {/* Header */}
+
       <div
         className="
           flex
           flex-col
+
+          gap-6
+          mb-10
+
           md:flex-row
           md:items-end
           md:justify-between
-          gap-8
-          mb-20
+          md:gap-8
+          md:mb-20
         "
       >
         <div>
           <p
             className="
-              text-xs
+              mb-3
+
+              text-[11px]
               uppercase
               tracking-[0.25em]
+
               text-neutral-500
-              mb-4
+
+              md:mb-4
+              md:text-xs
             "
           >
             Explore
@@ -53,11 +70,15 @@ export default function CategorySection({
 
           <h2
             className="
-              text-4xl
-              md:text-6xl
+              text-3xl
               font-light
               leading-tight
+              tracking-[-0.03em]
+
               text-neutral-900
+
+              sm:text-4xl
+              md:text-6xl
             "
           >
             Browse by topic.
@@ -67,8 +88,13 @@ export default function CategorySection({
         <p
           className="
             max-w-md
+
+            text-base
+            leading-7
+
             text-neutral-600
-            leading-8
+
+            md:leading-8
           "
         >
           Discover practical ideas for
@@ -77,13 +103,18 @@ export default function CategorySection({
         </p>
       </div>
 
+      {/* Categories */}
+
       <div
         className="
           grid
+
+          gap-px
+
+          bg-neutral-200
+
           md:grid-cols-2
           lg:grid-cols-3
-          gap-px
-          bg-neutral-200
         "
       >
         {categories.map((category) => (
@@ -94,29 +125,41 @@ export default function CategorySection({
           >
             <article
               className="
+                flex
+                h-full
+
                 bg-[#F7F6F3]
-                p-10
-                min-h-[260px]
+
+                p-6
+                min-h-[190px]
+
                 transition-all
                 duration-300
+
                 hover:bg-white
+
+                md:min-h-[260px]
+                md:p-10
               "
             >
               <div
                 className="
                   flex
+                  flex-1
                   flex-col
                   justify-between
-                  h-full
                 "
               >
                 <div>
                   <h3
                     className="
                       text-2xl
-                      md:text-3xl
                       font-light
+                      leading-tight
+
                       text-neutral-900
+
+                      md:text-3xl
                     "
                   >
                     {category.title}
@@ -124,9 +167,16 @@ export default function CategorySection({
 
                   <p
                     className="
-                      mt-6
+                      mt-4
+
+                      text-[15px]
+                      leading-7
+
                       text-neutral-600
-                      leading-8
+
+                      md:mt-6
+                      md:text-base
+                      md:leading-8
                     "
                   >
                     {category.description ||
@@ -136,13 +186,20 @@ export default function CategorySection({
 
                 <div
                   className="
-                    mt-10
-                    text-sm
+                    mt-6
+
+                    text-xs
                     uppercase
                     tracking-[0.2em]
+
                     text-neutral-500
-                    group-hover:text-neutral-900
+
                     transition-colors
+
+                    group-hover:text-neutral-900
+
+                    md:mt-10
+                    md:text-sm
                   "
                 >
                   Explore →
