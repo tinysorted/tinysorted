@@ -12,8 +12,8 @@ export default function HeroArticle({
 
   const imageUrl = article?.mainImage
     ? urlFor(article.mainImage)
-        .width(1600)
-        .quality(90)
+        .width(2200)
+        .quality(100)
         .url()
     : null;
 
@@ -21,36 +21,44 @@ export default function HeroArticle({
     <section
       className="
         mx-auto
-        max-w-7xl
-        px-5
-        pt-8
-        pb-10
+        max-w-[1440px]
 
-        md:px-6
-        md:pt-10
-        md:pb-14
+        px-6
+
+        pt-8
+        pb-16
+
+        lg:pt-10
+        lg:pb-20
       "
     >
-      <Link href={`/article/${article.slug?.current}`}>
+      <Link
+        href={`/article/${article.slug?.current}`}
+        className="block"
+      >
         <div
           className="
             grid
-            gap-8
+
             items-center
 
-            lg:grid-cols-2
-            lg:gap-12
+            gap-10
+
+            lg:grid-cols-[1.35fr_0.95fr]
+            lg:gap-20
           "
         >
+          {/* ====================================== */}
           {/* IMAGE */}
+          {/* ====================================== */}
 
           <div
             className="
               overflow-hidden
-              rounded-[28px]
-              bg-neutral-200
 
-              md:rounded-[32px]
+              rounded-xl
+
+              bg-neutral-200
             "
           >
             {imageUrl && (
@@ -58,33 +66,52 @@ export default function HeroArticle({
                 src={imageUrl}
                 alt={article.title}
                 className="
-                  h-[260px]
+                  h-[340px]
+
                   w-full
+
                   object-cover
 
-                  sm:h-[320px]
-                  md:h-[420px]
-                  lg:h-[500px]
+                  transition-transform
+                  duration-700
+
+                  group-hover:scale-[1.02]
+
+                  sm:h-[420px]
+
+                  md:h-[520px]
+
+                  lg:h-[660px]
                 "
               />
             )}
           </div>
 
+          {/* ====================================== */}
           {/* CONTENT */}
+          {/* ====================================== */}
 
-          <div>
+          <div
+            className="
+              flex
+              h-full
+
+              flex-col
+
+              justify-center
+            "
+          >
             <p
               className="
-                mb-3
+                mb-5
 
                 text-[11px]
+
                 uppercase
-                tracking-[0.25em]
 
-                text-neutral-500
+                tracking-[0.30em]
 
-                md:mb-4
-                md:text-xs
+                text-[#8C6A52]
               "
             >
               Featured Story
@@ -92,15 +119,21 @@ export default function HeroArticle({
 
             <h1
               className="
-                text-3xl
+                max-w-[560px]
+
+                text-[44px]
+
                 font-light
-                leading-tight
-                tracking-[-0.03em]
+
+                leading-[1.05]
+
+                tracking-[-0.04em]
 
                 text-neutral-900
 
-                sm:text-4xl
-                lg:text-6xl
+                sm:text-[52px]
+
+                lg:text-[74px]
               "
             >
               {article.title}
@@ -108,20 +141,63 @@ export default function HeroArticle({
 
             <p
               className="
-                mt-5
+                mt-8
 
-                text-base
-                leading-7
+                max-w-[520px]
+
+                text-[18px]
+
+                leading-9
 
                 text-neutral-600
-
-                md:mt-6
-                md:text-lg
-                md:leading-8
               "
             >
               {article.excerpt}
             </p>
+
+            {/* CTA */}
+
+            <div className="mt-12">
+              <span
+                className="
+                  inline-flex
+                  items-center
+
+                  gap-3
+
+                  border-b
+
+                  border-[#8C6A52]
+
+                  pb-2
+
+                  text-[13px]
+
+                  font-medium
+
+                  uppercase
+
+                  tracking-[0.22em]
+
+                  text-[#8C6A52]
+
+                  transition-all
+
+                  group-hover:gap-5
+                "
+              >
+                Read Article
+
+                <span
+                  className="
+                    text-lg
+                    leading-none
+                  "
+                >
+                  →
+                </span>
+              </span>
+            </div>
           </div>
         </div>
       </Link>

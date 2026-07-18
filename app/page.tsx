@@ -1,224 +1,138 @@
 import { client } from "@/sanity/lib/client";
 
 import {
-featuredArticleQuery,
-latestArticlesQuery,
-declutteringArticlesQuery,
-smallSpacesArticlesQuery,
-kitchenArticlesQuery,
-categoriesQuery,
+  featuredArticleQuery,
+  latestArticlesQuery,
+  categoriesQuery,
+  homepageSettingsQuery,
 } from "@/sanity/lib/queries";
 
 import HeroArticle from "@/components/HeroArticle";
 import FeaturedArticleGrid from "@/components/FeaturedArticleGrid";
+import PopularTrendingSection from "@/components/PopularTrendingSection";
 import ArticleGrid from "@/components/ArticleGrid";
 import CategorySection from "@/components/CategorySection";
 
 export default async function HomePage() {
-const featured = await client.fetch(
-featuredArticleQuery
-);
+  const featured = await client.fetch(
+    featuredArticleQuery
+  );
 
-const latestArticles = await client.fetch(
-latestArticlesQuery
-);
+  const latestArticles = await client.fetch(
+    latestArticlesQuery
+  );
 
-const declutteringArticles =
-await client.fetch(
-declutteringArticlesQuery
-);
+  const categories = await client.fetch(
+    categoriesQuery
+  );
 
-const smallSpacesArticles =
-await client.fetch(
-smallSpacesArticlesQuery
-);
+  const homepageSettings = await client.fetch(
+    homepageSettingsQuery
+  );
 
-const kitchenArticles =
-await client.fetch(
-kitchenArticlesQuery
-);
+  return (
+    <main className="bg-[#F7F6F3]">
+      {/* ====================================== */}
+      {/* HERO */}
+      {/* ====================================== */}
 
-const categories = await client.fetch(
-categoriesQuery
-);
+      <HeroArticle
+        article={featured}
+      />
 
-return ( <main className="bg-[#F7F6F3]">
+      {/* ====================================== */}
+      {/* CURATED STORIES */}
+      {/* ====================================== */}
 
+      <FeaturedArticleGrid
+        articles={latestArticles.slice(
+          0,
+          4
+        )}
+        settings={
+          homepageSettings ?? {}
+        }
+      />
 
-  {/* Hero */}
-  <HeroArticle article={featured} />
+      {/* ====================================== */}
+      {/* BROWSE TOPICS */}
+      {/* ====================================== */}
 
-  {/* Editorial Featured */}
-  <FeaturedArticleGrid
-    articles={latestArticles.slice(0, 4)}
-  />
+      <CategorySection
+        categories={categories}
+      />
 
-  {/* Browse Topics */}
-  <CategorySection
-    categories={categories}
-  />
+      {/* ====================================== */}
+      {/* POPULAR & TRENDING */}
+      {/* ====================================== */}
 
-  {/* Latest Articles */}
-  <section
-    className="
-      max-w-[1280px]
-      mx-auto
-      px-6
-      py-24
-      border-t
-      border-black/5
-    "
-  >
-    <div className="mb-14">
-      <p
+      <PopularTrendingSection
+        settings={
+          homepageSettings ?? {}
+        }
+      />
+
+      {/* ====================================== */}
+      {/* LATEST ARTICLES */}
+      {/* ====================================== */}
+
+      <section
         className="
-          uppercase
-          tracking-[0.2em]
-          text-xs
-          text-neutral-500
-          mb-3
+          mx-auto
+          max-w-[1280px]
+
+          border-t
+          border-black/5
+
+          px-6
+
+          py-24
         "
       >
-        Latest Articles
-      </p>
+        <div className="mb-14">
+          <p
+            className="
+              mb-3
 
-      <h2
-        className="
-          text-4xl
-          md:text-5xl
-          font-light
-        "
-      >
-        Explore more inspiration.
-      </h2>
-    </div>
+              text-xs
 
-    <ArticleGrid
-      articles={latestArticles.slice(4)}
-    />
-  </section>
+              uppercase
 
-  {/* Decluttering */}
-  <section
-    className="
-      max-w-[1280px]
-      mx-auto
-      px-6
-      py-24
-      border-t
-      border-black/5
-    "
-  >
-    <div className="mb-14">
-      <p
-        className="
-          uppercase
-          tracking-[0.2em]
-          text-xs
-          text-neutral-500
-          mb-3
-        "
-      >
-        Organization
-      </p>
+              tracking-[0.2em]
 
-      <h2
-        className="
-          text-4xl
-          md:text-5xl
-          font-light
-        "
-      >
-        Decluttering Guides
-      </h2>
-    </div>
+              text-neutral-500
+            "
+          >
+            {
+              homepageSettings
+                ?.latestArticles
+                ?.headline ??
+                "Latest Articles"
+            }
+          </p>
 
-    <ArticleGrid
-      articles={declutteringArticles}
-    />
-  </section>
+          <h2
+            className="
+              text-4xl
 
-  {/* Small Spaces */}
-  <section
-    className="
-      max-w-[1280px]
-      mx-auto
-      px-6
-      py-24
-      border-t
-      border-black/5
-    "
-  >
-    <div className="mb-14">
-      <p
-        className="
-          uppercase
-          tracking-[0.2em]
-          text-xs
-          text-neutral-500
-          mb-3
-        "
-      >
-        Living Better
-      </p>
+              font-light
 
-      <h2
-        className="
-          text-4xl
-          md:text-5xl
-          font-light
-        "
-      >
-        Small Space Living
-      </h2>
-    </div>
+              md:text-5xl
+            "
+          >
+            {
+              homepageSettings
+                ?.latestArticles
+                ?.subheadline ??
+                "Fresh inspiration and practical ideas."
+            }
+          </h2>
+        </div>
 
-    <ArticleGrid
-      articles={smallSpacesArticles}
-    />
-  </section>
-
-  {/* Kitchen */}
-  <section
-    className="
-      max-w-[1280px]
-      mx-auto
-      px-6
-      py-24
-      border-t
-      border-black/5
-    "
-  >
-    <div className="mb-14">
-      <p
-        className="
-          uppercase
-          tracking-[0.2em]
-          text-xs
-          text-neutral-500
-          mb-3
-        "
-      >
-        Home
-      </p>
-
-      <h2
-        className="
-          text-4xl
-          md:text-5xl
-          font-light
-        "
-      >
-        Kitchen Organization
-      </h2>
-    </div>
-
-    <ArticleGrid
-      articles={kitchenArticles}
-    />
-  </section>
-
-</main>
-
-);
+        <ArticleGrid
+          articles={latestArticles}
+        />
+      </section>
+    </main>
+  );
 }

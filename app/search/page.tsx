@@ -51,7 +51,7 @@ return ( <main className="bg-[#F7F6F3] min-h-screen"> <section
      >
 Search </p>
 
-```
+
     <h1
       className="
         text-5xl

@@ -3,221 +3,263 @@ import { urlFor } from "@/sanity/lib/image";
 
 interface Props {
   articles: any[];
+  settings?: any;
 }
 
 export default function FeaturedArticleGrid({
   articles,
+  settings,
 }: Props) {
   if (!articles?.length) return null;
 
-  const featured = articles[0];
-  const sidebar = articles.slice(1, 4);
+  const curated = settings?.curatedStories;
 
   return (
     <section
       className="
-        mx-auto
-        max-w-[1280px]
+        relative
+        overflow-hidden
 
-        px-5
-        py-14
-
-        md:px-6
-        md:py-20
-
-        lg:py-24
+        py-20
+        md:py-28
       "
     >
-      {/* Heading */}
+      {/* ====================================== */}
+      {/* BACKGROUND */}
+      {/* ====================================== */}
 
-      <div
-        className="
-          mb-8
+      <div className="absolute inset-0">
+        {curated?.backgroundImage ? (
+          <img
+            src={urlFor(curated.backgroundImage)
+              .width(2600)
+              .height(1500)
+              .fit("crop")
+              .quality(100)
+              .url()}
+            alt={
+              curated.backgroundImage.alt ??
+              "Curated Stories Background"
+            }
+            className="
+              absolute
+              inset-0
 
-          md:mb-14
-        "
-      >
-        <p
-          className="
-            mb-3
+              h-full
+              w-full
 
-            text-[11px]
-            uppercase
-            tracking-[0.2em]
+              object-cover
+              object-center
 
-            text-neutral-500
+              scale-[1.01]
+            "
+          />
+        ) : (
+          <div className="absolute inset-0 bg-[#4d3b2b]" />
+        )}
 
-            md:text-xs
-          "
-        >
-          Curated Stories
-        </p>
-
-        <h2
-          className="
-            text-3xl
-            font-light
-            leading-tight
-            tracking-[-0.03em]
-
-            text-neutral-900
-
-            sm:text-4xl
-            md:text-5xl
-          "
-        >
-          Thoughtful ideas for calmer living.
-        </h2>
-      </div>
-
-      {/* Content */}
-
-      <div
-        className="
-          grid
-
-          gap-8
-
-          lg:grid-cols-12
-        "
-      >
-        {/* Featured */}
-
-        <Link
-          href={`/article/${featured.slug?.current}`}
-          className="lg:col-span-7"
-        >
-          <article>
-            <div
-              className="
-                overflow-hidden
-                rounded-[28px]
-
-                md:rounded-[32px]
-              "
-            >
-              <img
-                src={urlFor(featured.mainImage)
-                  .width(1600)
-                  .url()}
-                alt={featured.title}
-                className="
-                  w-full
-
-                  h-[260px]
-
-                  object-cover
-
-                  transition
-                  duration-500
-
-                  hover:scale-[1.02]
-
-                  sm:h-[340px]
-                  md:h-[420px]
-                  lg:h-[640px]
-                "
-              />
-            </div>
-
-            <h3
-              className="
-                mt-5
-
-                text-2xl
-                font-light
-                leading-tight
-
-                text-neutral-900
-
-                sm:text-3xl
-                md:mt-8
-                md:text-4xl
-              "
-            >
-              {featured.title}
-            </h3>
-
-            <p
-              className="
-                mt-3
-
-                text-base
-                leading-7
-
-                text-neutral-600
-
-                md:mt-4
-                md:leading-8
-              "
-            >
-              {featured.excerpt}
-            </p>
-          </article>
-        </Link>
-
-        {/* Sidebar */}
+        {/* Dark Overlay */}
 
         <div
           className="
+            absolute
+            inset-0
+
+            bg-gradient-to-b
+            from-[#3d2e22]/45
+            via-[#4d3b2b]/40
+            to-[#4d3b2b]/55
+          "
+        />
+
+        {/* Soft Light */}
+
+        <div
+          className="
+            absolute
+            inset-0
+
+            bg-white/5
+          "
+        />
+      </div>
+
+      {/* ====================================== */}
+      {/* CONTENT */}
+      {/* ====================================== */}
+
+      <div
+        className="
+          relative
+
+          mx-auto
+          max-w-[1280px]
+
+          px-5
+          md:px-6
+        "
+      >
+        {/* Header */}
+
+        <div
+          className="
+            mb-14
+
             flex
             flex-col
 
             gap-6
 
-            lg:col-span-5
-            md:gap-8
+            lg:flex-row
+            lg:items-end
+            lg:justify-between
           "
         >
-          {sidebar.map((article) => (
+          <div>
+            <p
+              className="
+                mb-4
+
+                text-xs
+
+                uppercase
+
+                tracking-[0.22em]
+
+                text-white/70
+              "
+            >
+              Journal
+            </p>
+
+            <h2
+              className="
+                text-4xl
+                font-light
+
+                leading-none
+
+                text-white
+
+                md:text-6xl
+              "
+            >
+              {curated?.headline ??
+                "Curated Stories"}
+            </h2>
+
+            <p
+              className="
+                mt-6
+
+                max-w-xl
+
+                text-lg
+
+                leading-8
+
+                text-white/85
+              "
+            >
+              {curated?.subheadline ??
+                "Thoughtful reads to inspire a calmer, simpler, and beautifully organized home."}
+            </p>
+          </div>
+
+          </div>
+
+        {/* ====================================== */}
+        {/* CARDS */}
+        {/* ====================================== */}
+
+        <div
+          className="
+            grid
+
+            gap-6
+
+            sm:grid-cols-2
+            lg:grid-cols-4
+          "
+        >
+          {articles.slice(0, 4).map((article) => (
             <Link
               key={article._id}
-              href={`/article/${article.slug?.current}`}
+              href={`/article/${article.slug.current}`}
+              className="group"
             >
               <article
                 className="
-                  flex
-                  items-center
+                  overflow-hidden
 
-                  gap-4
+                  rounded-[26px]
 
-                  md:gap-5
+                  bg-[#F8F5EF]
+
+                  shadow-[0_25px_60px_rgba(0,0,0,0.12)]
+
+                  transition-all
+                  duration-500
+
+                  group-hover:-translate-y-2
+                  group-hover:shadow-[0_35px_80px_rgba(0,0,0,0.18)]
                 "
               >
-                <img
-                  src={urlFor(article.mainImage)
-                    .width(800)
-                    .url()}
-                  alt={article.title}
-                  className="
-                    h-[110px]
-                    w-[110px]
+                {/* IMAGE */}
 
-                    flex-shrink-0
+                <div className="overflow-hidden">
+                  <img
+                    src={urlFor(article.mainImage)
+                      .width(900)
+                      .height(1100)
+                      .quality(100)
+                      .url()}
+                    alt={article.title}
+                    className="
+                      h-[300px]
+                      md:h-[330px]
 
-                    rounded-[20px]
+                      w-full
 
-                    object-cover
+                      object-cover
 
-                    sm:h-[120px]
-                    sm:w-[120px]
+                      transition-transform
+                      duration-700
 
-                    md:h-[140px]
-                    md:w-[140px]
-                    md:rounded-[24px]
-                  "
-                />
+                      group-hover:scale-105
+                    "
+                  />
+                </div>
 
-                <div className="min-w-0 flex-1">
+                {/* CONTENT */}
+
+                <div className="p-7">
+                  <p
+                    className="
+                      text-[11px]
+
+                      uppercase
+
+                      tracking-[0.18em]
+
+                      text-[#8E6C52]
+                    "
+                  >
+                    {article.categories?.[0]?.title ??
+                      "Home"}
+                  </p>
+
                   <h3
                     className="
-                      text-lg
-                      font-medium
-                      leading-snug
+                      mt-4
+
+                      text-[30px]
+
+                      font-light
+
+                      leading-tight
 
                       text-neutral-900
-
-                      md:text-xl
                     "
                   >
                     {article.title}
@@ -225,18 +267,35 @@ export default function FeaturedArticleGrid({
 
                   <p
                     className="
-                      mt-2
+                      mt-4
 
-                      text-sm
-                      leading-6
+                      line-clamp-3
+
+                      leading-7
 
                       text-neutral-600
-
-                      line-clamp-2
                     "
                   >
                     {article.excerpt}
                   </p>
+
+                  <div
+                    className="
+                      mt-8
+
+                      text-sm
+
+                      text-neutral-500
+                    "
+                  >
+                    {new Date(
+                      article.publishedAt
+                    ).toLocaleDateString("en-US", {
+                      month: "long",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </div>
                 </div>
               </article>
             </Link>

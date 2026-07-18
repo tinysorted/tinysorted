@@ -1,67 +1,65 @@
 import { groq } from "next-sanity";
 
 /* =========================================
-FEATURED ARTICLE
+   FEATURED ARTICLE
 ========================================= */
 
 export const featuredArticleQuery = groq`
 *[_type == "article"]
 | order(featured desc, publishedAt desc)[0]{
-_id,
-title,
-slug,
-excerpt,
-publishedAt,
-featured,
+  _id,
+  title,
+  slug,
+  excerpt,
+  publishedAt,
+  featured,
 
-mainImage{
-alt,
-asset->
-},
+  mainImage{
+    alt,
+    asset->
+  },
 
-aestheticVideo{
-asset->
-},
+  aestheticVideo{
+    asset->
+  },
 
-categories[]->{
-_id,
-title,
-slug
-}
+  categories[]->{
+    _id,
+    title,
+    slug
+  }
 }
 `;
 
 /* =========================================
-ALL ARTICLES
+   ALL ARTICLES
 ========================================= */
 
 export const articlesQuery = groq`
 *[_type == "article"]
 | order(publishedAt desc){
-_id,
-title,
-slug,
-excerpt,
-publishedAt,
-featured,
+  _id,
+  title,
+  slug,
+  excerpt,
+  publishedAt,
+  featured,
 
-mainImage{
-alt,
-asset->
-},
+  mainImage{
+    alt,
+    asset->
+  },
 
-categories[]->{
-_id,
-title,
-slug
-}
+  categories[]->{
+    _id,
+    title,
+    slug
+  }
 }
 `;
 
 /* =========================================
-
-SINGLE ARTICLE
-
+   SINGLE ARTICLE
 ========================================= */
 
 export const articleQuery = groq`
@@ -69,6 +67,7 @@ export const articleQuery = groq`
   _type == "article" &&
   slug.current == $slug
 ][0]{
+
   _id,
   title,
   slug,
@@ -116,25 +115,21 @@ export const articleQuery = groq`
   },
 
   author->{
-  _id,
+    _id,
+    name,
+    slug,
+    role,
+    bio,
 
-  name,
+    image{
+      alt,
+      asset->
+    },
 
-  slug,
-
-  role,
-
-  bio,
-
-  image{
-    alt,
-    asset->
+    twitter,
+    linkedin,
+    website
   },
-
-  twitter,
-  linkedin,
-  website
-},
 
   faqs{
     items[]{
@@ -160,20 +155,21 @@ export const articleQuery = groq`
 }
 `;
 
- 
-
-
 /* =========================================
-ALL CATEGORIES
+   ALL CATEGORIES
 ========================================= */
 
-export const categoriesQuery = groq`*[_type == "category"] | order(title asc){   _id,
+export const categoriesQuery = groq`
+*[_type == "category"]
+| order(title asc){
+  _id,
   title,
   slug,
   description,
   showInNavbar,
   navbarOrder
-}`;
+}
+`;
 
 /* =========================================
    NAVBAR CATEGORIES
@@ -193,53 +189,56 @@ export const navbarCategoriesQuery = groq`
 `;
 
 /* =========================================
-SINGLE CATEGORY
+   SINGLE CATEGORY
 ========================================= */
 
-export const categoryQuery = groq`*[   _type == "category" &&
+export const categoryQuery = groq`
+*[
+  _type == "category" &&
   slug.current == $slug
-][0]{   _id,
+][0]{
+  _id,
   title,
   slug,
   description,
   showInNavbar,
   navbarOrder
-}`;
-
-/* =========================================
-ARTICLES BY CATEGORY
-========================================= */
-
-export const articlesByCategoryQuery = groq`
-*[
-_type == "article" &&
-$slug in categories[]->slug.current
-]
-| order(publishedAt desc){
-_id,
-title,
-slug,
-excerpt,
-publishedAt,
-featured,
-
-mainImage{
-alt,
-asset->
-},
-
-categories[]->{
-_id,
-title,
-slug
-}
 }
 `;
 
 /* =========================================
+   ARTICLES BY CATEGORY
+========================================= */
 
-RELATED ARTICLES
+export const articlesByCategoryQuery = groq`
+*[
+  _type == "article" &&
+  $slug in categories[]->slug.current
+]
+| order(publishedAt desc){
 
+  _id,
+  title,
+  slug,
+  excerpt,
+  publishedAt,
+  featured,
+
+  mainImage{
+    alt,
+    asset->
+  },
+
+  categories[]->{
+    _id,
+    title,
+    slug
+  }
+}
+`;
+
+/* =========================================
+   RELATED ARTICLES
 ========================================= */
 
 export const relatedArticlesQuery = groq`
@@ -266,101 +265,13 @@ export const relatedArticlesQuery = groq`
 `;
 
 /* =========================================
-HOMEPAGE SECTIONS
+   HOMEPAGE SECTIONS
 ========================================= */
 
 export const latestArticlesQuery = groq`
 *[_type == "article"]
-| order(publishedAt desc)[0...6]{
-_id,
-title,
-slug,
-excerpt,
-publishedAt,
-
-mainImage{
-alt,
-asset->
-},
-
-categories[]->{
-_id,
-title,
-slug
-}
-}
-`;
-
-export const declutteringArticlesQuery = groq`
-*[
-_type == "article" &&
-"decluttering" in categories[]->slug.current
-]
-| order(publishedAt desc)[0...4]{
-_id,
-title,
-slug,
-excerpt,
-
-mainImage{
-alt,
-asset->
-}
-}
-`;
-
-export const smallSpacesArticlesQuery = groq`
-*[
-_type == "article" &&
-"small-spaces" in categories[]->slug.current
-]
-| order(publishedAt desc)[0...4]{
-_id,
-title,
-slug,
-excerpt,
-
-mainImage{
-alt,
-asset->
-}
-}
-`;
-
-export const kitchenArticlesQuery = groq`
-*[
-_type == "article" &&
-"kitchen" in categories[]->slug.current
-]
-| order(publishedAt desc)[0...4]{
-_id,
-title,
-slug,
-excerpt,
-
-mainImage{
-alt,
-asset->
-}
-}
-`;
-
-/* =========================================
-   SEARCH ARTICLES
-========================================= */
-
-export const searchArticlesQuery = groq`
-*[
-  _type == "article" &&
-  (
-    title match $search
-    ||
-    excerpt match $search
-    ||
-    $categorySlug in categories[]->slug.current
-  )
-]
 | order(publishedAt desc){
+
   _id,
   title,
   slug,
@@ -381,12 +292,112 @@ export const searchArticlesQuery = groq`
 `;
 
 /* =========================================
-ALL AUTHORS
+   HOMEPAGE SETTINGS
+========================================= */
+
+export const homepageSettingsQuery = groq`
+*[_type == "homepageSettings"][0]{
+
+  hero{
+    badge,
+    buttonText,
+    buttonLink
+  },
+
+  curatedStories{
+    headline,
+    subheadline,
+    buttonText,
+    buttonLink,
+
+    backgroundImage{
+      alt,
+      asset->
+    }
+  },
+
+  popularTrending{
+    headline,
+    subheadline,
+    buttonText,
+    buttonLink,
+
+    backgroundImage{
+      alt,
+      asset->
+    },
+
+    articles[]->{
+      _id,
+      title,
+      slug,
+      excerpt,
+      publishedAt,
+
+      mainImage{
+        alt,
+        asset->
+      },
+
+      categories[]->{
+        _id,
+        title,
+        slug
+      }
+    }
+  },
+
+  latestArticles{
+    headline,
+    subheadline
+  }
+
+}
+`;
+/* =========================================
+   SEARCH ARTICLES
+========================================= */
+
+export const searchArticlesQuery = groq`
+*[
+  _type == "article" &&
+  (
+    title match $search
+    ||
+    excerpt match $search
+    ||
+    $categorySlug in categories[]->slug.current
+  )
+]
+| order(publishedAt desc){
+
+  _id,
+  title,
+  slug,
+  excerpt,
+  publishedAt,
+
+  mainImage{
+    alt,
+    asset->
+  },
+
+  categories[]->{
+    _id,
+    title,
+    slug
+  }
+}
+`;
+
+/* =========================================
+   ALL AUTHORS
 ========================================= */
 
 export const authorsQuery = groq`
 *[_type == "author"]
 | order(name asc){
+
   _id,
 
   name,
@@ -409,7 +420,7 @@ export const authorsQuery = groq`
 `;
 
 /* =========================================
-SINGLE AUTHOR
+   SINGLE AUTHOR
 ========================================= */
 
 export const authorQuery = groq`
@@ -417,10 +428,12 @@ export const authorQuery = groq`
   _type == "author" &&
   slug.current == $slug
 ][0]{
+
   _id,
 
   name,
   slug,
+
   role,
   bio,
 
@@ -441,7 +454,7 @@ export const authorQuery = groq`
 `;
 
 /* =========================================
-ARTICLES BY AUTHOR
+   ARTICLES BY AUTHOR
 ========================================= */
 
 export const articlesByAuthorQuery = groq`
@@ -473,7 +486,5 @@ export const articlesByAuthorQuery = groq`
     title,
     slug
   }
-
 }
 `;
-
