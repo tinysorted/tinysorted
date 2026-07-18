@@ -31,6 +31,7 @@ export const featuredArticleQuery = groq`
 }
 `;
 
+
 /* =========================================
    ALL ARTICLES
 ========================================= */
@@ -57,6 +58,7 @@ export const articlesQuery = groq`
   }
 }
 `;
+
 
 /* =========================================
    SINGLE ARTICLE
@@ -155,6 +157,7 @@ export const articleQuery = groq`
 }
 `;
 
+
 /* =========================================
    ALL CATEGORIES
 ========================================= */
@@ -170,6 +173,7 @@ export const categoriesQuery = groq`
   navbarOrder
 }
 `;
+
 
 /* =========================================
    NAVBAR CATEGORIES
@@ -187,6 +191,7 @@ export const navbarCategoriesQuery = groq`
   navbarOrder
 }
 `;
+
 
 /* =========================================
    SINGLE CATEGORY
@@ -237,6 +242,8 @@ export const articlesByCategoryQuery = groq`
 }
 `;
 
+
+
 /* =========================================
    RELATED ARTICLES
 ========================================= */
@@ -249,7 +256,7 @@ export const relatedArticlesQuery = groq`
     (categories[]->slug.current)[@ in $categories]
   ) > 0
 ]
-| order(publishedAt desc)[0...3]{
+| order(publishedAt desc)[0...2]{
 
   _id,
   title,
@@ -264,13 +271,15 @@ export const relatedArticlesQuery = groq`
 }
 `;
 
+
+
 /* =========================================
    HOMEPAGE SECTIONS
 ========================================= */
 
 export const latestArticlesQuery = groq`
 *[_type == "article"]
-| order(publishedAt desc){
+| order(publishedAt desc)[0...4]{
 
   _id,
   title,
@@ -291,6 +300,8 @@ export const latestArticlesQuery = groq`
 }
 `;
 
+
+
 /* =========================================
    HOMEPAGE SETTINGS
 ========================================= */
@@ -304,21 +315,12 @@ export const homepageSettingsQuery = groq`
     buttonLink
   },
 
+
   curatedStories{
+
     headline,
     subheadline,
-    buttonText,
-    buttonLink,
 
-    backgroundImage{
-      alt,
-      asset->
-    }
-  },
-
-  popularTrending{
-    headline,
-    subheadline,
     buttonText,
     buttonLink,
 
@@ -328,6 +330,43 @@ export const homepageSettingsQuery = groq`
     },
 
     articles[]->{
+
+      _id,
+      title,
+      slug,
+      excerpt,
+      publishedAt,
+      featured,
+
+      mainImage{
+        alt,
+        asset->
+      },
+
+      categories[]->{
+        _id,
+        title,
+        slug
+      }
+    }
+  },
+
+
+  popularTrending{
+
+    headline,
+    subheadline,
+
+    buttonText,
+    buttonLink,
+
+    backgroundImage{
+      alt,
+      asset->
+    },
+
+    articles[]->{
+
       _id,
       title,
       slug,
@@ -347,6 +386,7 @@ export const homepageSettingsQuery = groq`
     }
   },
 
+
   latestArticles{
     headline,
     subheadline
@@ -354,6 +394,7 @@ export const homepageSettingsQuery = groq`
 
 }
 `;
+
 /* =========================================
    SEARCH ARTICLES
 ========================================= */
@@ -390,6 +431,8 @@ export const searchArticlesQuery = groq`
 }
 `;
 
+
+
 /* =========================================
    ALL AUTHORS
 ========================================= */
@@ -418,6 +461,8 @@ export const authorsQuery = groq`
   featured
 }
 `;
+
+
 
 /* =========================================
    SINGLE AUTHOR
@@ -452,6 +497,8 @@ export const authorQuery = groq`
   seoDescription
 }
 `;
+
+
 
 /* =========================================
    ARTICLES BY AUTHOR
